@@ -38,7 +38,7 @@ exports.detectTextIntent  = function () {
       detectTextIntent2(PROJECT_ID, sessionId, query, languageCode = 'en-US')
   }
   catch(e){
-      console.log(e);
+    logger.log('error', e.stack, {logId: sessionId});
   } 
 }
 
@@ -67,7 +67,6 @@ function detectTextIntent2(projectId, sessionId, query, languageCode) {
     }
   }
   const sessionClient = new dialogflow.SessionsClient(config);
-
   // Define session path
   const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
@@ -83,22 +82,19 @@ function detectTextIntent2(projectId, sessionId, query, languageCode) {
   };
 
   // Send request and log result
-  sessionClient
-    .detectIntent(request)
-    .then(responses => {
-      console.log('detectTextIntent2()> Detected intent');
+  sessionClient.detectIntent(request).then(responses => {
+      logger.log('info', 'detectTextIntent2()> Detected intent', {logId: sessionId}); 
       const result = responses[0].queryResult;
-      console.log(`detectTextIntent2()> Query: ${result.queryText}`);
-      console.log(`detectTextIntent2()> Response: ${result.fulfillmentText}`);
+      logger.log('info', 'detectTextIntent2()> Query: ${result.queryText}', {logId: sessionId}); 
+      logger.log('info', 'detectTextIntent2()> Response: ${result.fulfillmentText}', {logId: sessionId});
       if (result.intent) {
-        console.log(`detectTextIntent2()> Intent: ${result.intent.displayName}`);
+        logger.log('info', 'detectTextIntent2()> Intent: ${result.intent.displayName}', {logId: sessionId});
       } else {
-        console.log(`detectTextIntent2()> No intent matched.`);
+        logger.log('info', 'detectTextIntent2()> No intent matched.', {logId: sessionId});
       }
-    })
-    .catch(err => {
-      console.error('detectTextIntent2()> ERROR:', err);
-    });
+  }).catch(e => {
+    logger.log('error', e.stack, {logId: sessionId});
+  });
 }
 
 /**
