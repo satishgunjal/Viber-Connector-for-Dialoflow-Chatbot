@@ -81,14 +81,14 @@ exports.mapSessionIdCreate = function(profileId){
     mapSessionId.set(profileId, []); //create empty array for each profileId
     mapSessionId.get(profileId).push(sessionId); //add sessionId as first parameter in empty array
     mapSessionId.get(profileId).push(timestamp); //add timestamp as second parameter in empty array
-    logger.log('info', "mapSessionIdCreate()> New map size is= " + mapSessionId.size, {logId: sessionId});  
+    logger.log('info', 'exports.mapSessionIdCreate()>New sessionId= ' + sessionId + ' created. New map size is= ' + mapSessionId.size, {logId: sessionId});  
     return sessionId;     
 }
 
 /**
  * Get session details for the profileId
  */
-exports.mapSessionIdGet =  function(profileId){
+exports.mapSessionIdGet =  function(profileId){     
     return mapSessionId.get(profileId);        
 }
 

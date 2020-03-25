@@ -4,9 +4,10 @@ const express = require('express');
 const router = express.Router();
 
 // Require the controllers
-const dialogflow = require('../controllers/dialogflow.js')
+const dialogflow = require('../test/test-dialogflow')
 //const dialogflow = require('.. .. '../controllers/dialogflow');
 
-//router.get('/detectIntent/text', dialogflow.detectTextIntent);
+router.get('/', dialogflow.get_request);
+router.post('/detectIntent/text', dialogflow.detectTextIntent);
 
 module.exports = router;
