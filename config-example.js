@@ -12,14 +12,21 @@ const timestampFormat = 'YYYY-MM-DD HH:mm:ss.SSS';
 const development = { 
   projectId: 'gdfrestapi',
   sessionIdTimeoutInMinutes: '2',
+  port:'1234',
   jsonKey:{
     privateKey: 'private key from JSON file',
     clientEmail: 'client email from JSON file'
   },
+  viber:{
+    webhookUrl : 'webhook URL',
+    botName : 'bot name',
+    botAvatarLink : 'avatar link',
+    viberToken : 'bot verification token'
+  },
   logs: {
     file: {
       level: 'debug',
-      filename: `C:/Users/satish.gunjal/Google Drive/Projects/ChatBOT/EBL-Dia/1-Source-Code/Logs/EBL-DIA-Viber-Connector/%DATE%-trace.log`,
+      filename: `D:/AGC/Logs/EBL-DIA-Viber-Connector/%DATE%-trace.log`,
       datePattern: "YYYY-MM-DD",
       zippedArchive: false,
       maxSize: '10m',
@@ -49,6 +56,13 @@ const development = {
 };
 
 const production = {
+  port:1234,
+  viber:{
+    webhookUrl : 'webhook URL',
+    botName : 'bot name',
+    botAvatarLink : 'avatar link',
+    viberToken : 'bot verification token'
+  },
     logs: {
       file: {
         level: 'debug',
