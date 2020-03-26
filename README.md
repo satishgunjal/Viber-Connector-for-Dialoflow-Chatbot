@@ -27,6 +27,8 @@ Viber connector for Dialogflow ChatBot
   ```
  - Application should start without any error, to cross check browse this url : http://localhost:9000/
  - Testing using postman
+   <img src="images/Dialogflow-API-Testing-Postman.PNG" width="700">
+  
   ```
   - Method: POST
   - URL: http://localhost:9000/viberconnector/detectIntent/text
