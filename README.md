@@ -30,15 +30,15 @@ Viber connector for Dialogflow ChatBot
  
    <img src="images/Dialogflow-API-Testing-Postman.PNG" width="700">
   
-  ```
-  - Method: POST
-  - URL: http://localhost:9000/viberconnector/detectIntent/text
-  - Body: {
-            "profileId": "profileId", 
-            "query": "test",
-            "languageCode": "en-US"
-          }
-          
-   - You should receive the fullfilment response in return
-  ```
+    ```
+    - Method: POST
+    - URL: http://localhost:9000/viberconnector/detectIntent/text
+    - Body: {
+              "profileId": "profileId", 
+              "query": "test",
+              "languageCode": "en-US"
+            }
+
+     - You should receive the fullfilment response in return
+    ```
 
