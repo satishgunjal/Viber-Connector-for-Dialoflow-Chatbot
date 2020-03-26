@@ -41,10 +41,10 @@ async function convertToViberMessage(responses) {
     try{
     if (Array.isArray(responses)) {
       await responses.forEach(async (response)=> {
-        
+        let reply = null;
         console.log(response.platform)
         if(response.platform=="VIBER"||response.platform=="PLATFORM_UNSPECIFIED"){
-          let reply = null;
+          
           if(response.text!=undefined){
             if (response.text.text[0] !== '') {
               reply = new TextMessage(response.text.text[0]);
@@ -122,7 +122,9 @@ async function convertToViberMessage(responses) {
                 reply.keyboard = payload.keyboard;
                 }
           }
+          if(reply!=null){
             replies.push(reply);
+          }
         }
         
       });
@@ -147,16 +149,19 @@ async function convertToViberMessage(responses) {
         var result=await dialogflow.detectTextIntent(userId,request)
         
         var fulfillment=result.fulfillmentMessages;
-        console.log('message() response received');
-        console.log(fulfillment)
+        
+        logger.log('info','message() response received'+JSON.stringify(fulfillment), {logId: userId});
+        
         reply=await convertToViberMessage(fulfillment)
+       
     }
     else{
-        logger.log('info', "bot.ont()> invalid message type");
+        logger.log('info', "bot.ont()> invalid message type", {logId: userId});
         reply = new TextMessage('Soory we only accept text input');
     }
     if (reply) {
         bot.sendMessage(userProfile, reply);
+        logger.log('info','message() reply sent', {logId: userId});
     }
     
 });
