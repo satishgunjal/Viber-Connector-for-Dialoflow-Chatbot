@@ -144,6 +144,7 @@ async function convertToViberMessage(responses) {
     let reply=null;
     if(message.text!=undefined){
         var request=message.text;
+        request=request.trim();
         logger.log('info', "bot.ont()> I/P> userId= " + userId, {logId: userId}); 
         logger.log('info', "bot.on()> I/P> request= " + request, {logId: userId}); 
         var result=await dialogflow.detectTextIntent(userId,request)
