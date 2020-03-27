@@ -19,21 +19,28 @@ const CLIENT_EMAIL = config.jsonKey.clientEmail;
 exports.detectTextIntent  = async function (profileId, query, languageCode = 'en-US') {
   let result = null;
   let sessionId =null;
+  let isEndOfConversation = 'false';
   try{      
       logger.log('info', "exports.detectTextIntent()> I/P> profileId= " + profileId, {logId: sessionId}); 
       logger.log('info', "exports.detectTextIntent()> I/P> query= " + query, {logId: sessionId}); 
       logger.log('info', "exports.detectTextIntent()> I/P> languageCode= " + languageCode, {logId: sessionId}); 
-      if(dialogflow_sessionid.isSessionIdExpired(profileId)){
+      
+      if(isEndOfConversation){
+        sessionId = dialogflow_sessionid.mapSessionIdCreate(profileId);   
+      }else if(dialogflow_sessionid.isSessionIdExpired(profileId)){ //check for time between last two messages
         sessionId = dialogflow_sessionid.mapSessionIdCreate(profileId);        
       }else{
         sessionId = dialogflow_sessionid.mapSessionIdGet(profileId)[0]; 
         logger.log('info', `exports.detectTextIntent()> Using existing sessionId ($sessionId)`, {logId: sessionId}); 
         dialogflow_sessionid.updateTimestamp(profileId);
-      }
+      }    
 
       //Uncomment the method you want test with
       //detectTextIntent1(query,PROJECT_ID);
       result  = await detectTextIntent2(PROJECT_ID, sessionId, query, languageCode)
+      isEndOfConversation = result.diagnosticInfo.fields.end_conversation.boolValue;
+      logger.log('info', 'exports.detectTextIntent()> isEndOfConversation= '+ isEndOfConversation, {logId: sessionId}); 
+        
   }
   catch(e){
     logger.log('error', e.stack, {logId: sessionId});
