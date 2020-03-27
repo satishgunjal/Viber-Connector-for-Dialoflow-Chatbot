@@ -24,8 +24,7 @@ exports.detectTextIntent  = async function (profileId, query, languageCode = 'en
       logger.log('info', "exports.detectTextIntent()> I/P> profileId= " + profileId, {logId: sessionId}); 
       logger.log('info', "exports.detectTextIntent()> I/P> query= " + query, {logId: sessionId}); 
       logger.log('info', "exports.detectTextIntent()> I/P> languageCode= " + languageCode, {logId: sessionId}); 
-      
-      if(isEndOfConversation){
+      if(isEndOfConversation=='true'){
         sessionId = dialogflow_sessionid.mapSessionIdCreate(profileId);   
       }else if(dialogflow_sessionid.isSessionIdExpired(profileId)){ //check for time between last two messages
         sessionId = dialogflow_sessionid.mapSessionIdCreate(profileId);        
@@ -38,7 +37,15 @@ exports.detectTextIntent  = async function (profileId, query, languageCode = 'en
       //Uncomment the method you want test with
       //detectTextIntent1(query,PROJECT_ID);
       result  = await detectTextIntent2(PROJECT_ID, sessionId, query, languageCode)
-      isEndOfConversation = result.diagnosticInfo.fields.end_conversation.boolValue;
+      if(result.diagnosticInfo!=undefined && result.diagnosticInfo!=null){
+        if(result.diagnosticInfo.fields!=undefined && result.diagnosticInfo.fields!=null){
+          if(result.diagnosticInfo.fields.end_conversation!=undefined && result.diagnosticInfo.fields.end_conversation!=null){
+            if(result.diagnosticInfo.fields.end_conversation.boolValue!=undefined && result.diagnosticInfo.fields.end_conversation.boolValue!=null){
+              isEndOfConversation = result.diagnosticInfo.fields.end_conversation.boolValue;
+            }
+          }
+        }
+      }
       logger.log('info', 'exports.detectTextIntent()> isEndOfConversation= '+ isEndOfConversation, {logId: sessionId}); 
         
   }
