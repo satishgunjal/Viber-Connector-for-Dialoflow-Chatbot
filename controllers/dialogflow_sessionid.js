@@ -29,7 +29,7 @@ exports.isSessionIdExpired = function(profileId){
     let sessionId = null;
     try{
         let sessionIdAndTimestamp= exports.mapSessionIdGet(profileId);
-        logger.log('info', "isSessionIdExpired()> sessionIdAndTimestamp= " + sessionIdAndTimestamp, {logId: sessionId});
+        logger.log('info', "isSessionIdExpired()> sessionIdAndTimestamp= " + sessionIdAndTimestamp, {logId: profileId});
     
         if(sessionIdAndTimestamp == null){
             result = true;

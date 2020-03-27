@@ -19,14 +19,13 @@ const CLIENT_EMAIL = config.jsonKey.clientEmail;
 exports.detectTextIntent  = async function (profileId, query, languageCode = 'en-US') {
   let result = null;
   let sessionId =null;
-  let isEndOfConversation = 'false';
+  let isEndOfConversation = false;
   try{      
-      logger.log('info', "exports.detectTextIntent()> I/P> profileId= " + profileId, {logId: sessionId}); 
-      logger.log('info', "exports.detectTextIntent()> I/P> query= " + query, {logId: sessionId}); 
-      logger.log('info', "exports.detectTextIntent()> I/P> languageCode= " + languageCode, {logId: sessionId}); 
-      if(isEndOfConversation=='true'){
-        sessionId = dialogflow_sessionid.mapSessionIdCreate(profileId);   
-      }else if(dialogflow_sessionid.isSessionIdExpired(profileId)){ //check for time between last two messages
+      logger.log('info', "exports.detectTextIntent()> I/P> profileId= " + profileId, {logId: profileId}); 
+      logger.log('info', "exports.detectTextIntent()> I/P> query= " + query, {logId: profileId}); 
+      logger.log('info', "exports.detectTextIntent()> I/P> languageCode= " + languageCode, {logId: profileId}); 
+      
+      if(dialogflow_sessionid.isSessionIdExpired(profileId)){ //check for time between last two messages
         sessionId = dialogflow_sessionid.mapSessionIdCreate(profileId);        
       }else{
         sessionId = dialogflow_sessionid.mapSessionIdGet(profileId)[0]; 
@@ -42,11 +41,15 @@ exports.detectTextIntent  = async function (profileId, query, languageCode = 'en
           if(result.diagnosticInfo.fields.end_conversation!=undefined && result.diagnosticInfo.fields.end_conversation!=null){
             if(result.diagnosticInfo.fields.end_conversation.boolValue!=undefined && result.diagnosticInfo.fields.end_conversation.boolValue!=null){
               isEndOfConversation = result.diagnosticInfo.fields.end_conversation.boolValue;
-            }
+             }
           }
         }
       }
-      logger.log('info', 'exports.detectTextIntent()> isEndOfConversation= '+ isEndOfConversation, {logId: sessionId}); 
+      logger.log('info', 'exports.detectTextIntent()> isEndOfConversation= '+ isEndOfConversation, {logId: sessionId});
+      if(isEndOfConversation == true){
+        console.log(isEndOfConversation)
+        dialogflow_sessionid.mapSessionIdDelete(profileId);
+      }
         
   }
   catch(e){
