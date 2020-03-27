@@ -43,7 +43,7 @@ async function convertToViberMessage(responses) {
       await responses.forEach(async (response)=> {
         let reply = null;
         console.log(response.platform)
-        if(response.platform=="VIBER"||response.platform=="PLATFORM_UNSPECIFIED"){
+        if(response.platform=="VIBER"){
           
           if(response.text!=undefined){
             if (response.text.text[0] !== '') {
