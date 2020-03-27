@@ -138,9 +138,10 @@ async function convertToViberMessage(responses) {
 
 
   bot.on(BotEvents.MESSAGE_RECEIVED,async (message, response) => {
-    logger.log('info','bot.on> event received '); 
+    var userId=null;
+    logger.log('info','bot.on()> event received ', {logId: userId}); 
     var userProfile = response.userProfile;   
-    var userId=userProfile.id;
+    userId=userProfile.id;
     let reply=null;
     if(message.text!=undefined){
         var request=message.text;
@@ -158,7 +159,7 @@ async function convertToViberMessage(responses) {
     }
     else{
         logger.log('info', "bot.ont()> invalid message type", {logId: userId});
-        reply = new TextMessage('Soory we only accept text input');
+        reply = new TextMessage('Sorry we only accept text input');
     }
     if (reply) {
         bot.sendMessage(userProfile, reply);
