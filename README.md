@@ -11,7 +11,8 @@ Viber connector for Dialogflow ChatBot. Follow below steps to create a Dialogflo
   ```
   const dialogflow = require('dialogflow');
   ```
-- Every message received through Viber API will be sent to Dialogflow to get the response to send to user
+- Every message received through Viber API will be sent to Dialogflow to get the response
+- Response received from Dialoflow is sent back to the user
 ## [Viber API Integration](https://developers.viber.com/docs/api/rest-bot-api/#message-types)
 - We will be using below Viber API modules 
   ```
