@@ -2,7 +2,7 @@
 
 ![Dialogflow_Viber_Connector](https://raw.githubusercontent.com/satishgunjal/images/master/Dialogflow_Viber_Connector.png)
 
-* Recently(around March-2020) Google Dialogflow removed Viber from its inbuilt connectors list. 
+* In the first quarter of 2020 Google decided to remove it from their platform. 
 * So to publish the Dialogflow bots to Viber we will have to use Dialogflow and Viber API to create a connector from scratch.
 * Below are the few major requirements to be able to work on this project:
   * Hands on with node.js.
