@@ -43,34 +43,36 @@
 * Note that for every API request we do to Dialoflow should contain project id and session id. Project id will remain same for a bot but session id will change for every session.
 * By default Dialogflow dont maintain the session and its upto the client(Viber, Facebook..etc) to manage the session for users. But Dialogflow context has default lifespan of 20 minutes. So the 20 minutes becomes our maximum timeout.
 * But since we have to create and maintain the session id we can obviously keep any value for session timeout. Please refer **dialogflow_sessionid.js** file for session management code.
-* Its very simple for every incoming message if that request is received withing preconfigured timeout then we use same sessionid or else we create new session id. 
+* Its very simple for every incoming message if that request is received within preconfigured time then we use same sessionid or else we create new session id. 
+* We also mantain the map of Viber user profile id and session id.
 
 # How To Test The Application
-- Cone the repository to local directory on you PC
-- Rename the config-example.js to config.js and replace the config parameters like log path, JSON key values
-- To know more about Dialogflow REST API and generating the JSON key please refer [Dialogflow-REST-API-Middleware](https://github.com/satishgunjal/Dialogflow-REST-API-Middleware.git)
-- Now run below command to install the dependencies in the local node_modules folder
+* Clone the repository to local directory on you PC
+* Rename the config-example.js to config.js and replace the config parameters like log path, JSON key values
+* To know more about Dialogflow REST API and generating the JSON key please refer [Dialogflow-REST-API-Middleware](https://github.com/satishgunjal/Dialogflow-REST-API-Middleware.git)
+* Now run below command to install the dependencies in the local node_modules folder
   ```
   $ npm install
   ```
-- Application controller conatins below files
+* Application controller conatins below files
   ```
   - dialogflow.js > contains the integration with Dialogflow REST API. Alos exports the functions which are used by viber.js and test-dialogflow.js
   - viber.js > contains the integration with Viber REST API. Consumes functions from dialogflow.js
   ```
 
-- test folder contains below files
+* Test folder contains below files
   ```
-  - test-index.js > contains code to create express server
+  - test-index.js > Contains code to create express server
   - test-route.js > GET and POST routes configured and mapped with functions in test-dialogflow.js
-  - test-dialogflow.js > contains functions which are mapped with GET and POST routes. 'exports.detectTextIntent' function calls function from dialogflow.js
+  - test-dialogflow.js > Contains functions which are mapped with GET and POST routes. 'exports.detectTextIntent' function calls function from dialogflow.js
   ```
-- Now to test Dialogflow API separatly run below command
+* Now to test Dialogflow API separatly run below command
   ```
   $ node test\test-index.js   
   ```
- - Application should start without any error, to cross check browse this url : http://localhost:9000/
- - Testing using postman
+ * Application should start without any error, to cross check browse this url : http://localhost:9000/
+ 
+ ## Testing using postman
  
    <img src="images/Dialogflow-API-Testing-Postman.PNG" width="700">
   
@@ -85,4 +87,3 @@
 
      - You should receive the fullfilment response in return
     ```
-
