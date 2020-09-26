@@ -38,6 +38,12 @@
 * For security reasons only URLs with valid and official SSL certificate from a trusted CA will be allowed. The certificate CA should be on the Sun Java trusted root certificates list.
 * This will enable our application to receive the every message that user will type on Viber messenger bot
 
+## Viber Send and receive message flow
+
+The following diagram describes the flow of sending and receiving messages by the account. All API requests and callbacks mentioned in the diagram will be explained later in this document. Reference https://developers.viber.com/
+
+![send_and_receive_message_flow](https://developers.viber.com/docs/img/send_and_receive_message_flow.png)
+
 # Session Handling
 * Since we are using our own connector we have to also do the session management.
 * Note that for every API request we do to Dialoflow should contain project id and session id. Project id will remain same for a bot but session id will change for every session.
