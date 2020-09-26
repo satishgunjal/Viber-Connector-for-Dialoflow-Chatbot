@@ -34,7 +34,7 @@
   const TextMessage = require('viber-bot').Message.Text;
   const PictureMessage = require('viber-bot').Message.Picture;
   ```
-* Please refer viber.js file for Viber API code.
+* Please refer [viber.js](controllers/viber.js) file for Viber API code.
 * In order to receive the events from Viber messenger in our node.js connector we need to set up the web hook.
 * Once you have your token you will be able to set your account’s web hook. This web hook will be used for receiving callbacks and user messages from Viber.
 * Setting the web hook will be done by calling the set_webhook API with a valid & certified URL. This action defines the account’s web hook and the type of events the account wants to be notified about.
@@ -51,7 +51,7 @@ The following diagram describes the flow of sending and receiving messages by th
 * Since we are using our own connector we have to also do the session management.
 * Note that for every API request we do to Dialogflow should contain project id and session id. Project id will remain same for a bot but session id will change for every session.
 * By default Dialogflow don't maintain the session and its up to the client(Viber, Facebook..etc) to manage the session for users. But Dialogflow context has default lifespan of 20 minutes. So the 20 minutes becomes our maximum timeout.
-* But since we have to create and maintain the session id we can obviously keep any value for session timeout. Please refer **dialogflow_sessionid.js** file for session management code.
+* But since we have to create and maintain the session id we can obviously keep any value for session timeout. Please refer [dialogflow_sessionid.js](controllers/dialogflow_sessionid.js) file for session management code.
 * Its very simple for every incoming message if that request is received within preconfigured time then we use same session id or else we create new session id. 
 * We also maintain the map of Viber user profile id and session id.
 
