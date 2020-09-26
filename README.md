@@ -83,16 +83,16 @@ The following diagram describes the flow of sending and receiving messages by th
  
  ## Testing using postman
  
-   <img src="images/Dialogflow-API-Testing-Postman.PNG" width="700">
+ ![Dialogflow-API-Testing-Postman](images/Dialogflow-API-Testing-Postman.PNG)
   
-    ```
-    - Method: POST
-    - URL: http://localhost:9000/viberconnector/detectIntent/text
-    - Body: {
-              "profileId": "profileId", 
-              "query": "test",
-              "languageCode": "en-US"
-            }
+ ```
+  - Method: POST
+  - URL: http://localhost:9000/viberconnector/detectIntent/text
+  - Body: {
+            "profileId": "profileId", 
+            "query": "test",
+            "languageCode": "en-US"
+          }
 
-     - You should receive the fullfilment response in return
-    ```
+   - You should receive the fullfilment response in return
+  ```
