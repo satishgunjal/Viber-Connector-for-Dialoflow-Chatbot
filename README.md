@@ -19,7 +19,7 @@
   ```
   const dialogflow = require('dialogflow');
   ```
-* Please refer dialogflow.js file for Dialogflow API code.
+* Please refer [dialogflow.js](controllers/dialogflow.js) file for Dialogflow API code.
 * Every message received through Viber API will be sent to Dialogflow to get the response
 * Response received from Dialogflow is sent back to the user
 
